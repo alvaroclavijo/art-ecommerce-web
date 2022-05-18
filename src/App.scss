@@ -1,9 +1,12 @@
+@import "./assets/fonts/fonts.scss";
+
 *{
   box-sizing: border-box;
   margin: 0;
+  font-family: "Archivo";
 }
 
-.main-title{
-  color: red;
-  font-size: 20px;
+.fixed-width{
+  width: 85%;
+  margin: auto;
 }
