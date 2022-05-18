@@ -1,0 +1,61 @@
+@import "../../../../styles/variables.scss";
+
+.item{
+    display: flex;
+    flex-direction: column;
+    height: 600px;
+    width: 30%;
+    & h4{
+        margin-top: 20px;
+        font-size: 22px;
+        font-weight: 700;
+        color: $description-text;
+    }
+
+    & h2{
+        font-size: 34px;
+        font-weight: 700;
+        color: $secondary-title;
+    }
+
+    & h5{
+        font-size: 29px;
+        font-weight: 400;
+        color: $description-text;
+    }
+}
+
+.picture{
+    height: 70%;
+    position: relative;
+    & h5{
+        font-size: 20px;
+        font-weight: 400;
+        color: $secondary-title;
+        text-align: center;
+        position: absolute;
+        top: 0;
+        background-color: white;
+        width: 127px;
+        height: 29px;
+        z-index: 1001;
+    }
+    & img{
+        position: absolute;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        z-index: 1000;
+    }
+    & div{
+        position: absolute;
+        bottom: -6px;
+        width: 100%;
+        height: 47px;
+        z-index: 999;
+    }
+    &:hover div{
+        z-index: 1001;
+    }
+}
