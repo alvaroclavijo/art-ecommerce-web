@@ -1,50 +1,59 @@
-import React from "react";
-import samurai from '../../assets/images/samurai_king_resting.svg';
-import suggestedPic1 from "../../assets/images/suggestedPic1.svg";
-import suggestedPic2 from "../../assets/images/suggestedPic2.svg";
-import suggestedPic3 from "../../assets/images/suggestedPic3.svg";
+import React, { useContext, useEffect, useState } from "react";
 import AddToCartBtn from "../AddToCartBtn";
+import { DAY_PICTURE_DATA } from "./dayPictureData";
 import styles from "./styles.module.scss";
+import { globalContext } from "../../App";
 
 const DayPicture = () => {
+
+  const [featuredProduct, setFeaturedProduct] = useState();
+  const { setCartProducts, setIsCartVisible } = useContext(globalContext);
+
+  useEffect(() => {
+    fetchDayPicture();
+  },[])
+
+  function fetchDayPicture(){
+    setFeaturedProduct(DAY_PICTURE_DATA);
+  }
+
+  function addProductToCart(){
+    console.log("add button executed")
+    setCartProducts(prev => [...prev, featuredProduct]);
+    setIsCartVisible(true);
+  }
+
   return (
     <section className={styles.dayPicture}>
-      <h2 className={styles["dayPicture__name"]}>Samurai King Resting</h2>
+      <h2 className={styles["dayPicture__name"]}>{featuredProduct?.name}</h2>
       <div className={styles["dayPicture__button"]}>
-        <AddToCartBtn/>
+        <AddToCartBtn onClick={addProductToCart}/>
       </div>
       <div className={styles["dayPicture__image"]}>
-        <img src={samurai}/>
+        <img src={featuredProduct?.image.src} alt={featuredProduct?.image.alt}/>
         <h5 >Photo of the day</h5>
       </div>
       <div className={styles["dayPicture__about"]}>
-        <h3 >About the Samurai King</h3>
-        <h4 >Pets</h4>
+        <h3 >About the {featuredProduct?.name}</h3>
+        <h4 >{featuredProduct?.category}</h4>
         <p>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla risus
-          mauris, imperdiet at mattis ac, aliquam sed sapien. Praesent sit amet
-          dui lobortis ligula bibendum pharetra. Vestibulum rutrum euismod
-          massa, nec volutpat dolor pulvinar ut. Nullam tincidunt commodo velit
-          non feugiat. Nunc malesuada ipsum sit amet posuere mattis. Fusce
-          ultrices nibh nec nulla mollis tincidunt. Nullam lacinia purus vel
-          eros molestie, at rutrum lorem malesuada. Praesent lacinia ligula sit
-          amet arcu aliquam, malesuada vestibulum sem euismod. Sed eget
-          tincidunt ligula, ut dignissim erat.
+          {featuredProduct?.details.description}
         </p>
       </div>
       <div className={styles["flex-container"]}>
         <div className={styles["dayPicture__suggested-products"]}>
             <h3>People also buy</h3>
             <div className={styles["pictures-container"]}>
-              <img src={suggestedPic1}/>
-              <img src={suggestedPic2}/>
-              <img src={suggestedPic3}/>
+              {featuredProduct?.details.recommendations.map((recommendation,index) => {
+                return (
+                <img key={index} src={recommendation.src} alt={recommendation.alt}/>)
+              })}
             </div>
         </div>
         <div className={styles["dayPicture__details"]}>
           <h3>Details</h3>
-          <h4>Size: 1020 x 1020 pixel</h4>
-          <h4>Size: 15 mb</h4>
+          <h4>Size: {featuredProduct?.details.dimmentions.width} x {featuredProduct?.details.dimmentions.height} pixel</h4>
+          <h4>Size: {featuredProduct?.details.size/1000} mb</h4>
         </div>
       </div>
 
