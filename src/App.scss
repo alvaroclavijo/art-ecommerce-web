@@ -10,6 +10,9 @@
   width: 85%;
   padding-bottom: 40px;
   margin: auto;
+  @media(max-width: 1300px){
+    width: 95%;
+  }
 }
 
 .dividing-line{

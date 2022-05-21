@@ -10,6 +10,7 @@
     top: 100px;
     padding: 20px;
     z-index: 1002;
+    max-height: 530px;
     &__close{
         width: 18px;
         align-self: flex-end;
@@ -20,6 +21,9 @@
         margin: 0;
         padding: 0;
         width: 100%;
+        overflow-y: auto;
+        overflow-x: hidden;
+        scroll-margin-right: 10px;
     }
     & button{
         border: 3px solid black;

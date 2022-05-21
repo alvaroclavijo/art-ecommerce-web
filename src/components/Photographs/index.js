@@ -8,36 +8,50 @@ import { PRODUCTS } from "./Products";
 import styles from "./styles.module.scss";
 
 export const Photographs = () => {
-  const [products, setProducts] = useState();
+  const [products, setProducts] = useState([]);
   const [categoriesFilters, setCategoriesFilter] = useState([]);
   const [priceRangeFilter, setPriceRangeFilter] = useState('');
-  const [sorter, setSorter] = useState('')
+  const [minPrice, setMinPrice] = useState(0);
+  const [maxPrice, setMaxPrice] = useState();
+  const [sortingColumn, setSortingColumn] = useState('')
+  const [sortingOrder, setSorteWay] = useState('desc');
+  const [totalCount, setTotalCount] = useState(0);
+  const [page, setPage] = useState(0);
 
   useEffect(() => {
     fetchProducts();
-  }, []);
+  }, [page]);
+
+  useEffect(() => {
+    let filters = {
+      categoriesFilters,sortingColumn,sortingOrder,minPrice,maxPrice
+    }
+    setPage(0);
+    // fetchProducts();
+  },[categoriesFilters,sortingColumn,sortingOrder,minPrice,maxPrice])
 
   function fetchProducts() {
+    console.log('*****fetching products*****');
     setProducts(PRODUCTS);
   }
 
   function onChangeCategoriesHandler(e) {
       if(e.target.checked){
-          categoriesFilters.push(e.target.name);
+        setCategoriesFilter(prev => [...prev,e.target.name]);
       }else{
-          let index = categoriesFilters.indexOf(e.target.name);
-          categoriesFilters.splice(index,1);
+        let filters = [...categoriesFilters];
+        let index = filters.indexOf(e.target.name);
+        filters.splice(index,1);
+        setCategoriesFilter(filters);
       }
-      filterByCategories(categoriesFilters);
   }
 
   function onChangePriceRangeHandler(e) {
-    let min;
-    let max;
 
     if(e.target.name === priceRangeFilter){
+      setMinPrice(0);
+      setMaxPrice(undefined);
       setPriceRangeFilter('');
-      filterByPrice(0,undefined);
       return;
     }
 
@@ -45,58 +59,54 @@ export const Photographs = () => {
 
     switch(e.target.name){
       case P0_20:
-        min=0;
-        max=20;
+        setMinPrice(0);
+        setMaxPrice(20);
         break;
       case P20_100:
-        min=20;
-        max=100;
+        setMinPrice(20);
+        setMaxPrice(100);
         break;
       case P100_200:
-        min=100;
-        max=200;
+        setMinPrice(100);
+        setMaxPrice(200);
         break;
       case PM200:
-        min=200;
-        max=undefined
+        setMinPrice(200);
+        setMaxPrice(null);
         break;
       default:
-        min=0;
-        max=undefined;
+        setMinPrice(0);
+        setMaxPrice(null);
     }
-    filterByPrice(min,max);
+  }
+
+  function toggleOrder(){
+    setSorteWay(prev => prev == 'desc' ? 'asc' : 'desc');
   }
 
   function onChangeSortHandler(e){
-    sortProductsBy(e.target.value);
+    setSortingColumn(e.target.value);
   }
 
-  function filterByPrice(min, max){
-    console.log(min,max);
+  function updatePageNumber(page){
+    setPage(page);
   }
 
-  function filterByCategories(selectedCategories){
-    console.log(selectedCategories);
-  }
-
-  function sortProductsBy(option){
-    console.log(option);
-  }
-  
   return (
     <div className={styles["photographs"]}>
       <div className={styles["photographs__title"]}>
         <h2>Photography /</h2>
         <h3> Premium Photos</h3>
       </div>
-
-      <div className={styles["photographs__sorting"]}>
-        <img src={sortingArrows} />
-        <label>Sort By</label>
-        <select name="sort" onChange={onChangeSortHandler}>
-          <option value="name">Name</option>
-          <option value="price">Price</option>
-        </select>
+      <div className={styles["sorting-container"]}>
+        <div className={styles["photographs__sorting"]}>
+          <img src={sortingArrows} onClick={toggleOrder}/>
+          <label>Sort By</label>
+          <select name="sort" onChange={onChangeSortHandler}>
+            <option value="name">Name</option>
+            <option value="price">Price</option>
+          </select>
+        </div>
       </div>
       <div className={styles["photographs__filtering"]}>
         <FilterPhotographs
@@ -106,7 +116,7 @@ export const Photographs = () => {
         />
       </div>
       <div className={styles["photographs__list"]}>
-        <PhotographsList products={products} />
+        <PhotographsList products={products} totalProducts={totalCount} page={page} changePage={(page) => updatePageNumber(page)}/>
       </div>
     </div>
   );
