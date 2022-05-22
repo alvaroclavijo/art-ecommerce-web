@@ -26,7 +26,7 @@ const ShoppingCartList = ({ closeCart }) => {
       />
       <ul className={styles["shopping-cart__products"]}>
         {cartProducts.length > 0 ? (
-          cartProducts.map((product,index) => <CartItem key={index} product={product} />)
+          cartProducts.map((product) => <CartItem key={product.product_id} product={product} />)
         ) : (
           <h5 className={styles["cart-empty-message"]}>Shopping Cart Empty</h5>
         )}

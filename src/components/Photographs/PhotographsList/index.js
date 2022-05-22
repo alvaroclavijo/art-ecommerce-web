@@ -1,26 +1,41 @@
-import React from 'react';
-import { PhotographItem } from './PhotographItem';
-import { Pagination } from '@mui/material';
+import React, { useContext } from "react";
+import { globalContext } from "../../../App";
+import { PhotographItem } from "./PhotographItem";
+import { Pagination } from "@mui/material";
 
 import styles from "./styles.module.scss";
+import Loading from "../../Loading";
 
 const PhotographsList = ({ products, totalProducts, page, changePage }) => {
+  const { isLoading } = useContext(globalContext);
 
-  function onChangePageHandler(event, value){
+  function onChangePageHandler(event, value) {
     changePage(value);
   }
 
   return (
-    <div className={styles["main-container"]} >
+    <div className={styles["main-container"]}>
       <div className={styles.photos}>
-        {products?.map((product,index) => <PhotographItem key={index} product={product}/>)}
+        {isLoading ? (
+          <Loading />
+        ) : (
+          products?.map((product) => (
+            <PhotographItem key={product.product_id} product={product} />
+          ))
+        )}
       </div>
+
       <div className={styles["pagination"]}>
-        <Pagination count={10} page={page} size="large" onChange={onChangePageHandler} boundaryCount={2}></Pagination>
+        <Pagination
+          count={Math.ceil(totalProducts / 6)}
+          page={page}
+          size="large"
+          onChange={onChangePageHandler}
+          boundaryCount={2}
+        ></Pagination>
       </div>
     </div>
+  );
+};
 
-  )
-}
-
-export default PhotographsList
+export default PhotographsList;

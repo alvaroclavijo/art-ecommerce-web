@@ -4,38 +4,38 @@ import { PEOPLE, FOOD, CITIES, LANDMARKS, NATURE, PETS, PREMIUM } from "../../..
 import { P0_20, P20_100, P100_200, PM200 } from "../../../utils/princeRangeFilters";
 import styles from "./styles.module.scss";
 
-const FilterPhotographs = ({ onChangeCategories, onChangePriceRange, selectedPriceFilter }) => {
+const FilterPhotographs = ({ onChangeCategories, onChangePriceRange, selectedPriceFilter, categories }) => {
   return (
     <div className={styles.filter}>
       <div className={styles["filter__section"]}>
         <h3>Category</h3>
         <ul className={styles["filter__section-list"]}>
           <div className={styles["filter__section-list-item"]}>
-            <input type="checkbox" name={PEOPLE} id={PEOPLE} onChange={onChangeCategories}/>
+            <input type="checkbox" checked={categories.includes(PEOPLE)} name={PEOPLE} id={PEOPLE} onChange={onChangeCategories}/>
             <label htmlFor={PEOPLE}>{PEOPLE}</label>
           </div>
           <div className={styles["filter__section-list-item"]}>
-            <input type="checkbox" name={PREMIUM} id={PREMIUM} onChange={onChangeCategories}/>
+            <input type="checkbox" checked={categories.includes(PREMIUM)} name={PREMIUM} id={PREMIUM} onChange={onChangeCategories}/>
             <label htmlFor={PREMIUM}>{PREMIUM}</label>
           </div>
           <div className={styles["filter__section-list-item"]}>
-            <input type="checkbox" name="pets" id={PETS} onChange={onChangeCategories}/>
+            <input type="checkbox" checked={categories.includes(PETS)} name="pets" id={PETS} onChange={onChangeCategories}/>
             <label htmlFor={PETS}>{PETS}</label>
           </div>
           <div className={styles["filter__section-list-item"]}>
-            <input type="checkbox" name={FOOD} id={FOOD} onChange={onChangeCategories}/>
+            <input type="checkbox" checked={categories.includes(FOOD)} name={FOOD} id={FOOD} onChange={onChangeCategories}/>
             <label htmlFor={FOOD}>{FOOD}</label>
           </div>
           <div className={styles["filter__section-list-item"]}>
-            <input type="checkbox" name={LANDMARKS} id={LANDMARKS} onChange={onChangeCategories}/>
+            <input type="checkbox" checked={categories.includes(LANDMARKS)} name={LANDMARKS} id={LANDMARKS} onChange={onChangeCategories}/>
             <label htmlFor={LANDMARKS}>{LANDMARKS}</label>
           </div>
           <div className={styles["filter__section-list-item"]}>
-            <input type="checkbox" name={CITIES} id={CITIES} onChange={onChangeCategories}/>
+            <input type="checkbox" checked={categories.includes(CITIES)} name={CITIES} id={CITIES} onChange={onChangeCategories}/>
             <label htmlFor={CITIES}>{CITIES}</label>
           </div>
           <div className={styles["filter__section-list-item"]}>
-            <input type="checkbox" name={NATURE} id={NATURE} onChange={onChangeCategories}/>
+            <input type="checkbox" checked={categories.includes(NATURE)} name={NATURE} id={NATURE} onChange={onChangeCategories}/>
             <label htmlFor={NATURE}>{NATURE}</label>
           </div>
         </ul>
