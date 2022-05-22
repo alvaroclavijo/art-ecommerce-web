@@ -1,6 +1,5 @@
 import React, { useContext } from 'react';
 import AddToCartBtn from '../../../AddToCartBtn';
-
 import styles from "./styles.module.scss";
 import { globalContext } from '../../../../App';
 
@@ -17,9 +16,7 @@ export const PhotographItem = ({ product }) => {
     <div className={styles.item}>
         <div className={styles.picture}>
             {product?.bestseller && <h5>Best Seller</h5>}
-            {/* TODO INTEGRATE IMAGES WITH FETCHED DATA , ERASE THE FOLLOWING CODE AND UNCOMMMENT THE NEXT ONE*/}
-            <img src={"http://dummyimage.com/226x100.png/cc0000/ffffff"} alt={"something"}/>
-            {/* <img src={product?.src} alt={product?.alt}/> */}
+            <img src={product?.image} alt={product?.name}/>
             <div>
                 <AddToCartBtn onClick={addProductToCart}/>
             </div>

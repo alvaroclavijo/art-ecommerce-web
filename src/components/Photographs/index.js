@@ -16,15 +16,7 @@ export const Photographs = () => {
   const { setIsLoading } = useContext(globalContext);
 
   const [products, setProducts] = useState([]);
-  const [categories, setCategories] = useState([
-    PEOPLE,
-    PREMIUM,
-    PETS,
-    FOOD,
-    LANDMARKS,
-    CITIES,
-    NATURE,
-  ]);
+  const [categories, setCategories] = useState([]);
   const [priceRangeFilter, setPriceRangeFilter] = useState('');
   const [minPrice, setMinPrice] = useState(0);
   const [maxPrice, setMaxPrice] = useState(999999999);
@@ -42,7 +34,7 @@ export const Photographs = () => {
   function fetchProducts() {
     let limit = PAGE_SIZE;
     let offset = (page - 1) * PAGE_SIZE;
-    let productsQuery = FETCH_ALL_PRODUCTS(minPrice, maxPrice, sortingColumn, sortingOrder);
+    let productsQuery = FETCH_ALL_PRODUCTS(minPrice, maxPrice, sortingColumn, sortingOrder, categories);
     setIsLoading(true);
     client
       .query({
@@ -50,7 +42,6 @@ export const Photographs = () => {
         variables: { limit, offset, categories }
       })
       .then((result) => {
-        console.log(result);
         setProducts(result.data.results)
         setTotalCount(result.data.pageInfo.totalCount.count)
         setIsLoading(false);
@@ -69,9 +60,6 @@ export const Photographs = () => {
         let index = filters.indexOf(e.target.name);
         filters.splice(index,1);
         setCategories(filters);
-        if(filters.length == 0){
-          setCategories(PEOPLE,LANDMARKS,PREMIUM,PETS,FOOD,CITIES,NATURE)
-        }
       }
       setPage(1);
   }
@@ -134,7 +122,7 @@ export const Photographs = () => {
       </div>
       <div className={styles["sorting-container"]}>
         <div className={styles["photographs__sorting"]}>
-          <img src={sortingArrows} onClick={toggleOrder}/>
+          <img src={sortingArrows} onClick={toggleOrder} alt="sorting-arrows"height={35} width={35} />
           <label>Sort By</label>
           <select name="sort" onChange={onChangeSortHandler}>
             <option value="name">Name</option>

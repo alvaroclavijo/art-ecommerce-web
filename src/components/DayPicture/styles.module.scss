@@ -46,7 +46,8 @@
         }
         & img{
             width: 100%;
-            height: auto;
+            max-height: 553px;
+            object-fit: cover;
             max-width: 100%;
         }
     }
@@ -68,6 +69,7 @@
             color: $description-text;
             font-weight: 700;
             margin-top: 15px;
+            text-transform: capitalize;
         }
         p{
             font-size: 18px;
