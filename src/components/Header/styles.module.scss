@@ -12,4 +12,16 @@
     &__shopping-cart{
         height: 54px;
     }
+    & .cart__counter{
+        position: absolute;
+        bottom: 10px;
+        right: -16px;
+        width: 21px;
+        height: 21px;
+        background-color: black;
+        color: white;
+        font-size: 20px;
+        font-weight: 700;
+        padding-left: 5px;
+    }
 }
