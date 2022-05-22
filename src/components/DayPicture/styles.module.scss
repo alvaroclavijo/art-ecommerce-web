@@ -8,17 +8,30 @@
         width: 60%;
         font-size: 32px;
         font-weight: 700;
+        order: 1;
+        @media (max-width:660px){
+            width: 100%;
+        }
     }
     &__button{
         width: 15%;
         height: 47px;
         min-width: 190px;
+        order: 2;
+        @media (max-width:660px){
+            order: 3;
+            width: 100%;
+        }
     }
     &__image{
         position: relative;
         width: 100%;
         margin-bottom: 10px;
         margin-top: 20px;
+        order: 3;
+        @media (max-width:660px){
+            order: 2;
+        }
         & h5{
             width: clamp(127px, 20vw , 272px);
             height: clamp(30px, 6vw, 67px);
@@ -29,11 +42,12 @@
             bottom: 0px;
             left: 0px;
             font-weight: 700;
-            font-size: clamp(15px, 3vw, 20px);
+            font-size: clamp(15px, 2vw, 20px);
         }
         & img{
             width: 100%;
-            height: auto;
+            max-height: 553px;
+            object-fit: cover;
             max-width: 100%;
         }
     }
@@ -41,6 +55,10 @@
         width: 60%;
         margin-right: 10%;
         margin-top: 15px;
+        order: 4;
+        @media(max-width:960px){
+            width: 100%;
+        }
         h3{
             font-size: 22px;
             color: $secondary-title;
@@ -51,6 +69,7 @@
             color: $description-text;
             font-weight: 700;
             margin-top: 15px;
+            text-transform: capitalize;
         }
         p{
             font-size: 18px;
@@ -75,6 +94,9 @@
             font-weight: 700;
             margin-top: 35px;
             text-align: end;
+            @media(max-width:630px){
+                text-align: start;
+            }
         }
         h4{
             font-size: 16px;
@@ -82,6 +104,9 @@
             font-weight: 400;
             margin-top: 15px;
             text-align: end;
+            @media(max-width:630px){
+                text-align: start;
+            }
         }
 
     }
@@ -94,6 +119,14 @@
     flex-wrap: wrap;
     gap: 10px;
     margin-top: 15px;
+    @media(max-width:630px){
+        justify-content: center;
+    }
+    & img{
+        width: clamp( 97px , 10vw ,117px);
+        height: clamp( 122px , 13vw ,147px);;
+        object-fit: cover;
+    }
 }
 
 .flex-container{
@@ -101,4 +134,14 @@
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+    order: 5;
+    @media(max-width:960px){
+        width: 100%;
+        flex-direction: row;
+    }
+    @media(max-width:630px){
+        width: 100%;
+        flex-direction: column;
+    }
+
 }

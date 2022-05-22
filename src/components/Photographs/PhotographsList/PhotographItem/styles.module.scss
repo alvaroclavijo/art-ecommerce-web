@@ -5,17 +5,24 @@
     flex-direction: column;
     height: 600px;
     width: 30%;
+    min-width: 260px;
+    @media (max-width:570px){
+        width: 100%;
+        max-width: 362px;
+    }
     & h4{
         margin-top: 20px;
         font-size: 22px;
         font-weight: 700;
         color: $description-text;
+        text-transform: capitalize;
     }
 
     & h2{
         font-size: 34px;
         font-weight: 700;
         color: $secondary-title;
+        text-transform: capitalize;
     }
 
     & h5{
@@ -50,10 +57,13 @@
     }
     & div{
         position: absolute;
-        bottom: -6px;
+        bottom: 0;
         width: 100%;
         height: 47px;
         z-index: 999;
+        @media(max-width:1300px){
+            z-index: 1001;
+        }
     }
     &:hover div{
         z-index: 1001;
