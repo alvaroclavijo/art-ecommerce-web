@@ -1,0 +1,88 @@
+export const PRODUCTS = [
+  {
+    name: "Red Bench",
+    category: "people",
+    price: 3.89,
+    currency: "USD",
+    image: {
+      src: "http://dummyimage.com/226x100.png/cc0000/ffffff",
+      alt: "Cat, toddy",
+    },
+    bestseller: true,
+    featured: false,
+    details: null,
+  },
+  {
+    name: "Egg Balloon",
+    category: "food",
+    price: 93.89,
+    currency: "USD",
+    image: {
+      src: "http://dummyimage.com/246x100.png/cc0000/ffffff",
+      alt: "Brown lemur",
+    },
+    bestseller: false,
+    featured: false,
+    details: null,
+  },
+  {
+    name: "Man",
+    category: "people",
+    price: 100,
+    currency: "USD",
+    image: {
+      src: "http://dummyimage.com/205x100.png/ff4444/ffffff",
+      alt: "Radiated tortoise",
+    },
+    bestseller: false,
+    featured: false,
+    details: null,
+  },
+  {
+    name: "Architecture",
+    category: "landmarks",
+    price: 101,
+    currency: "USD",
+    dimmentions: {
+      width: 1020,
+      height: 1020,
+    },
+    image: {
+      src: "http://dummyimage.com/243x100.png/cc0000/ffffff",
+      alt: "Nuthatch, red-breasted",
+    },
+    bestseller: false,
+    featured: false,
+    details: null,
+  },
+  {
+    name: "Man",
+    category: "people",
+    price: 100,
+    currency: "USD",
+    image: {
+      src: "http://dummyimage.com/209x100.png/cc0000/ffffff",
+      alt: "Crimson-breasted shrike",
+    },
+    bestseller: false,
+    featured: false,
+    details: null,
+  },
+  {
+    name: "Architecture",
+    category: "landmarks",
+    price: 101,
+    currency: "USD",
+    dimmentions: {
+      width: 1020,
+      height: 1020,
+    },
+    image: {
+      src: "http://dummyimage.com/231x100.png/ff4444/ffffff",
+      alt: "Bulbul, african red-eyed",
+    },
+    bestseller: false,
+    featured: false,
+    details: null,
+  },
+];

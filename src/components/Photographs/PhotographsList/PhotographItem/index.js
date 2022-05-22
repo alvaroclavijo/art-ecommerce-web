@@ -1,24 +1,31 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import AddToCartBtn from '../../../AddToCartBtn';
 
-import dog from "../../../../assets/images/suggestedPic1.svg"
-
 import styles from "./styles.module.scss";
+import { globalContext } from '../../../../App';
 
-export const PhotographItem = () => {
+export const PhotographItem = ({ product }) => {
+
+  const { setCartProducts, setIsCartVisible } = useContext(globalContext);
+
+  function addProductToCart(){
+    setCartProducts(prev => [...prev, product]);
+    setIsCartVisible(true);
+  }
+
   return (
     <div className={styles.item}>
         <div className={styles.picture}>
-            <h5>Best Seller</h5>
-            <img src={dog}/>
+            {product?.bestseller && <h5>Best Seller</h5>}
+            <img src={product?.image.src} alt={product?.image.alt}/>
             <div>
-                <AddToCartBtn/>
+                <AddToCartBtn onClick={addProductToCart}/>
             </div>
             
         </div>
-        <h4>People</h4>
-        <h2>Red Bench</h2>
-        <h5>$3.89</h5>
+        <h4>{product?.category}</h4>
+        <h2>{product?.name}</h2>
+        <h5>${product?.price}</h5>
     </div>
   )
 }

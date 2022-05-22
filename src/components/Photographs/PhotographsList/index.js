@@ -5,16 +5,11 @@ import nextPageIcon from "../../../assets/icons/next_icon.svg"
 
 import styles from "./styles.module.scss";
 
-const PhotographsList = () => {
+const PhotographsList = ({ products }) => {
   return (
     <div className={styles["main-container"]} >
       <div className={styles.photos}>
-          <PhotographItem/>
-          <PhotographItem/>
-          <PhotographItem/>
-          <PhotographItem/>
-          <PhotographItem/>
-          <PhotographItem/>
+        {products?.map((product,index) => <PhotographItem key={index} product={product}/>)}
       </div>
       <div className={styles["pagination"]}>
         <img src={prevPageIcon}/>
