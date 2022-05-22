@@ -1,23 +1,22 @@
 import React from 'react';
 import { PhotographItem } from './PhotographItem';
-import prevPageIcon from "../../../assets/icons/prev_icon.svg";
-import nextPageIcon from "../../../assets/icons/next_icon.svg"
+import { Pagination } from '@mui/material';
 
 import styles from "./styles.module.scss";
 
-const PhotographsList = ({ products }) => {
+const PhotographsList = ({ products, totalProducts, page, changePage }) => {
+
+  function onChangePageHandler(event, value){
+    changePage(value);
+  }
+
   return (
     <div className={styles["main-container"]} >
       <div className={styles.photos}>
         {products?.map((product,index) => <PhotographItem key={index} product={product}/>)}
       </div>
       <div className={styles["pagination"]}>
-        <img src={prevPageIcon}/>
-        <label>1</label>
-        <label className={styles.activePage}>2</label>
-        <label>3</label>
-        <label>4</label>
-        <img src={nextPageIcon}/>
+        <Pagination count={10} page={page} size="large" onChange={onChangePageHandler} boundaryCount={2}></Pagination>
       </div>
     </div>
 
