@@ -1,0 +1,14 @@
+.header{
+    display: flex;
+    flex-direction: row;
+    height: 100px;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: 4px solid #E4E4E4;
+    &__logo{
+        height: 25px;
+    }
+    &__shopping-cart{
+        height: 54px;
+    }
+}
