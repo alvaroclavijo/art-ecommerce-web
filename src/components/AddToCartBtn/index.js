@@ -2,7 +2,7 @@ import React from 'react';
 import styles from './styles.module.scss';
 
 
-const AddToCartBtn = ({onClick, product}) => {
+const AddToCartBtn = ({onClick}) => {
 
   
   return (

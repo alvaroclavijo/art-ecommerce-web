@@ -1,6 +1,5 @@
 import React from "react";
 
-import pic from "../../../../assets/images/samurai_king_resting.svg";
 import styles from "./styles.module.scss";
 
 export const CartItem = ({ product }) => {

@@ -6,10 +6,8 @@ import { FETCH_ALL_PRODUCTS } from "../../GraphQLQueries";
 import { P0_20, P100_200, P20_100, PM200 } from "../../utils/princeRangeFilters";
 import FilterPhotographs from "./FilterPhotographs";
 import PhotographsList from "./PhotographsList";
-import { PRODUCTS } from "./Products";
 import styles from "./styles.module.scss";
 import { client } from "../../App";
-import { CITIES, FOOD, LANDMARKS, NATURE, PEOPLE, PETS, PREMIUM } from "../../utils/categoryOptions";
 
 export const Photographs = () => {
 
