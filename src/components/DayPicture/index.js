@@ -1,6 +1,5 @@
 import React, { useContext, useEffect, useState } from "react";
 import AddToCartBtn from "../AddToCartBtn";
-import { DAY_PICTURE_DATA } from "./dayPictureData";
 import styles from "./styles.module.scss";
 import { globalContext } from "../../App";
 import { FETCH_FEATURED_PRODUCT } from "../../GraphQLQueries";
@@ -44,7 +43,6 @@ const DayPicture = () => {
       </div>
       <div className={styles["dayPicture__image"]}>
         <img src={featuredProduct?.image} alt={featuredProduct?.name}/>
-        {/* <img src={"http://dummyimage.com/239x100.png/dddddd/000000"} alt={"day picture"}/> */}
         <h5 >Photo of the day</h5>
       </div>
       <div className={styles["dayPicture__about"]}>
