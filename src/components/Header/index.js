@@ -14,9 +14,9 @@ const Header = () => {
   }
   return (
     <header className={styles.header}>
-        <img className={styles["header__logo"]} src={logo} alt="logo"/>
+        <img className={styles["header__logo"]} width={153} height={25} src={logo} alt="logo"/>
         <div className={styles["header__shopping-cart"]}>
-          <img src={shoppingCart} alt="shopping-cart" onClick={toggleCartVisibility}/>
+          <img src={shoppingCart} alt="shopping-cart" onClick={toggleCartVisibility} width={54} height={54}/>
           {cartProducts.length > 0 && <label className={styles["cart__counter"]}>{cartProducts.length}</label>}
         </div>
         <ShoppingCartList closeCart = {toggleCartVisibility}/>

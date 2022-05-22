@@ -23,6 +23,7 @@ const ShoppingCartList = ({ closeCart }) => {
         className={styles["shopping-cart__close"]}
         src={closeIcon}
         onClick={closeCart}
+        alt="shopping-cart"
       />
       <ul className={styles["shopping-cart__products"]}>
         {cartProducts.length > 0 ? (
