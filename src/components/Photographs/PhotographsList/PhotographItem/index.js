@@ -17,11 +17,12 @@ export const PhotographItem = ({ product }) => {
     <div className={styles.item}>
         <div className={styles.picture}>
             {product?.bestseller && <h5>Best Seller</h5>}
-            <img src={product?.image.src} alt={product?.image.alt}/>
+            {/* TODO INTEGRATE IMAGES WITH FETCHED DATA , ERASE THE FOLLOWING CODE AND UNCOMMMENT THE NEXT ONE*/}
+            <img src={"http://dummyimage.com/226x100.png/cc0000/ffffff"} alt={"something"}/>
+            {/* <img src={product?.src} alt={product?.alt}/> */}
             <div>
                 <AddToCartBtn onClick={addProductToCart}/>
             </div>
-            
         </div>
         <h4>{product?.category}</h4>
         <h2>{product?.name}</h2>

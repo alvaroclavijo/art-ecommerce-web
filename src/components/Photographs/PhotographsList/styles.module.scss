@@ -6,6 +6,7 @@
     justify-content: space-between;
     flex-wrap: wrap;
     gap: 20px;
+    min-height: 1220px;
     @media(max-width: 1100px){
         justify-content: center;
     }

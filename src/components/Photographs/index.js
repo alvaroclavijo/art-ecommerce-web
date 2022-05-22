@@ -1,57 +1,88 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
 
+import { globalContext } from "../../App";
 import sortingArrows from "../../assets/icons/sorting_arrows.svg";
+import { FETCH_ALL_PRODUCTS } from "../../GraphQLQueries";
 import { P0_20, P100_200, P20_100, PM200 } from "../../utils/princeRangeFilters";
 import FilterPhotographs from "./FilterPhotographs";
 import PhotographsList from "./PhotographsList";
 import { PRODUCTS } from "./Products";
 import styles from "./styles.module.scss";
+import { client } from "../../App";
+import { CITIES, FOOD, LANDMARKS, NATURE, PEOPLE, PETS, PREMIUM } from "../../utils/categoryOptions";
 
 export const Photographs = () => {
+
+  const { setIsLoading } = useContext(globalContext);
+
   const [products, setProducts] = useState([]);
-  const [categoriesFilters, setCategoriesFilter] = useState([]);
+  const [categories, setCategories] = useState([
+    PEOPLE,
+    PREMIUM,
+    PETS,
+    FOOD,
+    LANDMARKS,
+    CITIES,
+    NATURE,
+  ]);
   const [priceRangeFilter, setPriceRangeFilter] = useState('');
   const [minPrice, setMinPrice] = useState(0);
-  const [maxPrice, setMaxPrice] = useState();
-  const [sortingColumn, setSortingColumn] = useState('')
-  const [sortingOrder, setSorteWay] = useState('desc');
+  const [maxPrice, setMaxPrice] = useState(999999999);
+  const [sortingColumn, setSortingColumn] = useState('name')
+  const [sortingOrder, setSorteWay] = useState('asc');
   const [totalCount, setTotalCount] = useState(0);
-  const [page, setPage] = useState(0);
+  const [page, setPage] = useState(1);
+
+  const PAGE_SIZE = 6;
 
   useEffect(() => {
     fetchProducts();
-  }, [page]);
-
-  useEffect(() => {
-    let filters = {
-      categoriesFilters,sortingColumn,sortingOrder,minPrice,maxPrice
-    }
-    setPage(0);
-    // fetchProducts();
-  },[categoriesFilters,sortingColumn,sortingOrder,minPrice,maxPrice])
+  },[categories,sortingColumn,sortingOrder,minPrice,maxPrice,page])
 
   function fetchProducts() {
-    console.log('*****fetching products*****');
-    setProducts(PRODUCTS);
+    let limit = PAGE_SIZE;
+    let offset = (page - 1) * PAGE_SIZE;
+    let productsQuery = FETCH_ALL_PRODUCTS(minPrice, maxPrice, sortingColumn, sortingOrder);
+    setIsLoading(true);
+    client
+      .query({
+        query: productsQuery,
+        variables: { limit, offset, categories }
+      })
+      .then((result) => {
+        console.log(result);
+        setProducts(result.data.results)
+        setTotalCount(result.data.pageInfo.totalCount.count)
+        setIsLoading(false);
+      })
+      .catch((error) => {
+        console.log(error);
+        setIsLoading(false);
+      });
   }
 
   function onChangeCategoriesHandler(e) {
       if(e.target.checked){
-        setCategoriesFilter(prev => [...prev,e.target.name]);
+        setCategories(prev => [...prev,e.target.name]);
       }else{
-        let filters = [...categoriesFilters];
+        let filters = [...categories];
         let index = filters.indexOf(e.target.name);
         filters.splice(index,1);
-        setCategoriesFilter(filters);
+        setCategories(filters);
+        if(filters.length == 0){
+          setCategories(PEOPLE,LANDMARKS,PREMIUM,PETS,FOOD,CITIES,NATURE)
+        }
       }
+      setPage(1);
   }
 
   function onChangePriceRangeHandler(e) {
 
     if(e.target.name === priceRangeFilter){
       setMinPrice(0);
-      setMaxPrice(undefined);
+      setMaxPrice(999999999);
       setPriceRangeFilter('');
+      setPage(1);
       return;
     }
 
@@ -72,20 +103,23 @@ export const Photographs = () => {
         break;
       case PM200:
         setMinPrice(200);
-        setMaxPrice(null);
+        setMaxPrice(999999999);
         break;
       default:
         setMinPrice(0);
-        setMaxPrice(null);
+        setMaxPrice(999999999);
     }
+    setPage(1);
   }
 
   function toggleOrder(){
     setSorteWay(prev => prev == 'desc' ? 'asc' : 'desc');
+    setPage(1)
   }
 
   function onChangeSortHandler(e){
     setSortingColumn(e.target.value);
+    setPage(1);
   }
 
   function updatePageNumber(page){
@@ -113,10 +147,11 @@ export const Photographs = () => {
           onChangeCategories={onChangeCategoriesHandler}
           onChangePriceRange={onChangePriceRangeHandler}
           selectedPriceFilter={priceRangeFilter}
+          categories={categories}
         />
       </div>
       <div className={styles["photographs__list"]}>
-        <PhotographsList products={products} totalProducts={totalCount} page={page} changePage={(page) => updatePageNumber(page)}/>
+        <PhotographsList products={products} totalProducts={totalCount} page={page} changePage={(page) => updatePageNumber(page)} />
       </div>
     </div>
   );
