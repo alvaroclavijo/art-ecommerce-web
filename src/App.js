@@ -6,9 +6,12 @@ import Header from './components/Header';
 import { Photographs } from './components/Photographs';
 
 export const globalContext = createContext({});
-
+const HASURA_SECRET = 'FgyDVl7D60FUInq9WArM9XkE15dOBDlHXj1YPJFQ09smzwjv7LAxR2dagMiZnMvy'; 
 export const client = new ApolloClient({
-  uri: "https://pro-fish-59.hasura.app/v1/graphql",
+  uri: "https://grown-crawdad-81.hasura.app/v1/graphql",
+  headers: {
+    'x-hasura-admin-secret': HASURA_SECRET
+  },
   cache: new InMemoryCache(),
 });
 
