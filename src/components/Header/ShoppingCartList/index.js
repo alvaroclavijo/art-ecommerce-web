@@ -1,19 +1,27 @@
 import React, { useContext } from "react";
+import { useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 
 import closeIcon from "../../../assets/icons/close_icon.svg";
 import { CartItem } from "./CartItem";
 import styles from "./styles.module.scss";
 import { globalContext } from "../../../App";
+import { cartActions } from "../../../store/cart-slice";
 
 const ShoppingCartList = ({ closeCart }) => {
-  const { isCartVisible, cartProducts, setCartProducts } = useContext(globalContext);
 
-  if (!isCartVisible) {
+  const showCart = useSelector(state => state.ui.isCartVisible);
+  const cartProducts = useSelector(state => state.shoppingCart.items);
+
+  const dispatch = useDispatch();
+  const { setCartProducts } = useContext(globalContext);
+
+  if (!showCart) {
     return;
   }
 
   function clearCartProducts(){
-    setCartProducts([]);
+    dispatch(cartActions.removeAllItems());
     closeCart();
   }
 

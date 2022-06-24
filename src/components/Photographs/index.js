@@ -2,7 +2,7 @@ import React, { useEffect, useState, useContext } from "react";
 
 import { globalContext } from "../../App";
 import sortingArrows from "../../assets/icons/sorting_arrows.svg";
-import { FETCH_ALL_PRODUCTS } from "../../GraphQLQueries";
+import { FETCH_ALL_PRODUCTS, FETCH_CATEGOTIES } from "../../GraphQLQueries";
 import { P0_20, P100_200, P20_100, PM200 } from "../../utils/princeRangeFilters";
 import FilterPhotographs from "./FilterPhotographs";
 import PhotographsList from "./PhotographsList";
@@ -48,6 +48,19 @@ export const Photographs = () => {
         console.log(error);
         setIsLoading(false);
       });
+  }
+
+  function fetchAllCategories(){
+    client
+    .query({
+      query: FETCH_CATEGOTIES
+    })
+    .then((result) => {
+      console.log(result.data.catefories);
+    })
+    .catch((error) => {
+      console.log(error);
+    })
   }
 
   function onChangeCategoriesHandler(e) {

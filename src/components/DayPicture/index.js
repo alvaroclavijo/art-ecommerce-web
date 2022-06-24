@@ -1,14 +1,19 @@
 import React, { useContext, useEffect, useState } from "react";
+import { useDispatch } from "react-redux";
 import AddToCartBtn from "../AddToCartBtn";
 import styles from "./styles.module.scss";
 import { globalContext } from "../../App";
 import { FETCH_FEATURED_PRODUCT } from "../../GraphQLQueries";
 import { client } from "../../App";
+import { uiActions } from "../../store/ui-slice";
+import { cartActions } from "../../store/cart-slice";
 
 const DayPicture = () => {
 
+  const dispatch = useDispatch();
+
   const [featuredProduct, setFeaturedProduct] = useState();
-  const { setCartProducts, setIsCartVisible } = useContext(globalContext);
+  const { setCartProducts } = useContext(globalContext);
 
   useEffect(() => {
     fetchDayPicture();
@@ -31,8 +36,8 @@ const DayPicture = () => {
   }
 
   function addProductToCart(){
-    setCartProducts(prev => [...prev, featuredProduct]);
-    setIsCartVisible(true);
+    dispatch(cartActions.addItemToCart(featuredProduct));
+    dispatch(uiActions.toggle())
   }
 
   return (

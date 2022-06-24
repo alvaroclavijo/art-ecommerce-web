@@ -60,4 +60,12 @@ export const FETCH_FEATURED_PRODUCT = gql`
   }
 `;
 
+export const FETCH_CATEGOTIES = gql`
+query allCategories {
+  categories {
+    category
+  }
+}
+`;
+
 

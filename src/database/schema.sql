@@ -13,3 +13,6 @@ CREATE TABLE product (
     currency VARCHAR(6) DEFAULT 'USD',
     image TEXT
 );
+
+create view categories as
+select category from product group by category;

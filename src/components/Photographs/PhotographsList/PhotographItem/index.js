@@ -1,15 +1,19 @@
 import React, { useContext } from 'react';
+import { useDispatch } from 'react-redux';
 import AddToCartBtn from '../../../AddToCartBtn';
 import styles from "./styles.module.scss";
 import { globalContext } from '../../../../App';
+import { uiActions } from '../../../../store/ui-slice';
 
 export const PhotographItem = ({ product }) => {
 
-  const { setCartProducts, setIsCartVisible } = useContext(globalContext);
+  const dispatch = useDispatch()
+
+  const { setCartProducts } = useContext(globalContext);
 
   function addProductToCart(){
     setCartProducts(prev => [...prev, product]);
-    setIsCartVisible(true);
+    dispatch(uiActions.toggle())
   }
 
   return (

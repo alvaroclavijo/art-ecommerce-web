@@ -17,7 +17,6 @@ export const client = new ApolloClient({
 
 function App() {
 
-  const [isCartVisible, setIsCartVisible] = useState(false);
   const [cartProducts, setCartProducts] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
 
@@ -25,8 +24,6 @@ function App() {
     <ApolloProvider client={client}>
       <globalContext.Provider 
       value={{
-        isCartVisible,
-        setIsCartVisible,
         cartProducts,
         setCartProducts,
         isLoading,
