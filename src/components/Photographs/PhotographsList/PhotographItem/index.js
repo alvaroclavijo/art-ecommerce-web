@@ -1,4 +1,5 @@
 import React, { useContext } from 'react';
+import { Link } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import AddToCartBtn from '../../../AddToCartBtn';
 import styles from "./styles.module.scss";
@@ -24,9 +25,11 @@ export const PhotographItem = ({ product }) => {
                 <AddToCartBtn onClick={addProductToCart}/>
             </div>
         </div>
-        <h4>{product?.category}</h4>
-        <h2>{product?.name}</h2>
-        <h5>${product?.price}</h5>
+        <Link to={`/products/${product.product_id}`}>
+          <h4>{product?.category}</h4>
+          <h2>{product?.name}</h2>
+          <h5>${product?.price}</h5>
+        </Link>
     </div>
   )
 }

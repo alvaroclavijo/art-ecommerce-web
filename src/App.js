@@ -1,9 +1,12 @@
+import {Fragment} from 'react';
 import { ApolloClient, ApolloProvider, InMemoryCache } from '@apollo/client';
 import { createContext, useEffect, useState } from 'react';
 import './App.scss';
 import DayPicture from './components/DayPicture';
 import Header from './components/Header';
 import { Photographs } from './components/Photographs';
+import { Route, Navigate, Routes } from "react-router-dom";
+import ItemDetail from './pages/ItemDetail'
 
 export const globalContext = createContext({});
 const HASURA_SECRET = 'FgyDVl7D60FUInq9WArM9XkE15dOBDlHXj1YPJFQ09smzwjv7LAxR2dagMiZnMvy'; 
@@ -31,9 +34,16 @@ function App() {
       }}>
         <div className='fixed-width'>
           <Header/>
-          <DayPicture/>
-          <hr className='dividing-line'/>
-          <Photographs/>
+          <Routes>
+              <Route path="/" element={<Navigate to="/welcome"/>}/>
+              <Route path="/welcome" element={
+              <>
+                <DayPicture/>
+                <hr className='dividing-line'/>
+                <Photographs/>
+              </>}/>
+              <Route path="/products/:itemId" element={<ItemDetail/>}/>
+            </Routes>
         </div>
       </globalContext.Provider>
     </ApolloProvider>
