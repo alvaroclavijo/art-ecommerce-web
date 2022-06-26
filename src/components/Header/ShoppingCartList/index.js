@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React from "react";
 import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
 
@@ -14,8 +14,6 @@ const ShoppingCartList = ({ closeCart }) => {
   const cartProducts = useSelector(state => state.shoppingCart.items);
 
   const dispatch = useDispatch();
-  const { setCartProducts } = useContext(globalContext);
-
   if (!showCart) {
     return;
   }

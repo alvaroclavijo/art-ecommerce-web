@@ -4,16 +4,15 @@ import AddToCartBtn from '../../../AddToCartBtn';
 import styles from "./styles.module.scss";
 import { globalContext } from '../../../../App';
 import { uiActions } from '../../../../store/ui-slice';
+import { cartActions } from '../../../../store/cart-slice';
 
 export const PhotographItem = ({ product }) => {
 
   const dispatch = useDispatch()
 
-  const { setCartProducts } = useContext(globalContext);
-
   function addProductToCart(){
-    setCartProducts(prev => [...prev, product]);
-    dispatch(uiActions.toggle())
+    dispatch(cartActions.addItemToCart(product));
+    dispatch(uiActions.showCart());
   }
 
   return (

@@ -7,7 +7,7 @@ export const CartItem = ({ product }) => {
     <li className={styles.item}>
       <div className={styles["item__description"]}>
         <h3 className={styles["item__name"]}>{product.name}</h3>
-        <h4 className={styles["item__price"]}>$ {product.price}</h4>
+        <h4 className={styles["item__price"]}>$ {product.totalPrice}</h4>
       </div>
       <img src={product?.image} alt={product?.name}/>
     </li>

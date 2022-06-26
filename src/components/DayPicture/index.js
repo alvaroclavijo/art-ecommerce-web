@@ -13,7 +13,6 @@ const DayPicture = () => {
   const dispatch = useDispatch();
 
   const [featuredProduct, setFeaturedProduct] = useState();
-  const { setCartProducts } = useContext(globalContext);
 
   useEffect(() => {
     fetchDayPicture();
@@ -37,7 +36,7 @@ const DayPicture = () => {
 
   function addProductToCart(){
     dispatch(cartActions.addItemToCart(featuredProduct));
-    dispatch(uiActions.toggle())
+    dispatch(uiActions.showCart())
   }
 
   return (
