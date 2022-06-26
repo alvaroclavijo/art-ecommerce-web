@@ -7,6 +7,7 @@ import Header from './components/Header';
 import { Photographs } from './components/Photographs';
 import { Route, Navigate, Routes } from "react-router-dom";
 import ItemDetail from './pages/ItemDetail'
+import NotFound from './pages/NotFound';
 
 export const globalContext = createContext({});
 const HASURA_SECRET = 'FgyDVl7D60FUInq9WArM9XkE15dOBDlHXj1YPJFQ09smzwjv7LAxR2dagMiZnMvy'; 
@@ -43,6 +44,7 @@ function App() {
                 <Photographs/>
               </>}/>
               <Route path="/products/:itemId" element={<ItemDetail/>}/>
+              <Route path="*" element={<NotFound/>}/>
             </Routes>
         </div>
       </globalContext.Provider>
