@@ -80,6 +80,7 @@ const ItemDetail = () => {
             <AddToCartBtn onClick={addToCart}/>
           </div>
       </div> }
+      {!product && !isLoading && <h1 className={styles.notFound}>Product not found!</h1>}
     </>
 
   )

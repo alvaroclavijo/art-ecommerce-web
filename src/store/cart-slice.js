@@ -27,14 +27,20 @@ const shoppingCartSlice = createSlice({
         },
         reduceItemQuantity(state, action){
             const id = action.payload;
-            const existingItem = state.items.find(item => item.id === id);
+            const existingItem = state.items.find(item => item.product_id === id);
             state.totalQuantity--;
             if(existingItem.quantity === 1){
-                state.items = state.items.filter(item => item.id !== existingItem.id)
+                state.items = state.items.filter(item => item.product_id !== existingItem.product_id);
             } else {
                 existingItem.quantity--;
                 existingItem.totalPrice = existingItem.totalPrice - existingItem.price;
             }
+        },
+        deleteItem(state,action){
+            const id = action.payload;
+            const existingItem = state.items.find(item => item.product_id === id);
+            state.items = state.items.filter(item => item.product_id !== existingItem.product_id);
+            state.totalQuantity = state.totalQuantity - existingItem.quantity;
         },
         removeAllItems(state){
             state.items = [];
