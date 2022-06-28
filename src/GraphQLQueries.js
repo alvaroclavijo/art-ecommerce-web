@@ -68,4 +68,20 @@ query allCategories {
 }
 `;
 
+export const FETCH_PRODUCT_BY_ID = gql`
+query productById ($product_id: Int!){
+  product(where: {product_id: {_eq: $product_id}}) {
+    product_id
+    price
+    name
+    image
+    category
+    height
+    size
+    description
+    width
+  }
+}
+`
+
 

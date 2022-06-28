@@ -1,0 +1,33 @@
+.item{
+    display: flex;
+    flex-direction: column;
+    margin-top: 40px;
+    & >a{
+        text-decoration: none;
+        align-self: flex-end;
+        font-size: 20px;
+        color: inherit;
+    }
+    & .info{
+        display: flex;
+        flex-direction: column;
+        align-self: center;
+        width: clamp(250px, 60% ,1000px);
+        padding: 5%;
+        &-field{
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+            align-items: center;
+            min-height: 50px;
+            border-bottom: 2px solid rgb(233, 233, 233);
+            & label{
+                width: 30%;
+            }
+            & h3{
+                width:70%;
+                text-transform: capitalize;
+            }
+        }
+    }
+}
