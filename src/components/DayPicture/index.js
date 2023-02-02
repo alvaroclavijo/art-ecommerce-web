@@ -65,7 +65,7 @@ const DayPicture = () => {
           <div className={styles["dayPicture__suggested-products"]}>
               <h3>People also buy</h3>
               <div className={styles["pictures-container"]}>
-                {featuredProduct?.recommendations.map((recommendation,index) => {
+                {featuredProduct?.recommendations?.map((recommendation,index) => {
                   return (
                   <img key={index} src={recommendation.src} alt={recommendation.alt}/>)
                 })}

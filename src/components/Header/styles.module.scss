@@ -7,6 +7,11 @@
     border-bottom: 4px solid #E4E4E4;
     position: relative;
     &__logo{
+        line-height: 25px;
+        letter-spacing: 5px;
+        color: rgb(15, 98, 70);
+        font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+        font-size: clamp(40px, 3vw, 50px);
         height: 25px;
     }
     &__shopping-cart{
