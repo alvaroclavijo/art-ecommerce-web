@@ -9,6 +9,7 @@ import AddToCartBtn from '../../components/AddToCartBtn';
 import Loading from '../../components/Loading';
 import { cartActions } from '../../store/cart-slice';
 import { uiActions } from '../../store/ui-slice';
+import { homePath } from '../../utils/routePaths';
 
 const ItemDetail = () => {
   const { itemId } = useParams();
@@ -50,7 +51,7 @@ const ItemDetail = () => {
     <>
      {isLoading && <Loading/>}
      {product && <div className={styles.item}>
-          <Link to="/welcome"> &#x21e6; Back</Link>
+          <Link to={`${homePath}`}> &#x21e6; Back</Link>
           <img src={product.image}/>
           <div className={styles.info}>
             <div className={styles["info-field"]}>

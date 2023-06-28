@@ -1,13 +1,12 @@
-import {Fragment} from 'react';
 import { ApolloClient, ApolloProvider, InMemoryCache } from '@apollo/client';
-import { createContext, useEffect, useState } from 'react';
+import { createContext, useState } from 'react';
 import './App.scss';
-import DayPicture from './components/DayPicture';
 import Header from './components/Header';
-import { Photographs } from './components/Photographs';
 import { Route, Navigate, Routes } from "react-router-dom";
 import ItemDetail from './pages/ItemDetail'
 import NotFound from './pages/NotFound';
+import Home from './pages/Home';
+import { homePath, productsPath } from './utils/routePaths';
 
 export const globalContext = createContext({});
 const HASURA_SECRET = 'FgyDVl7D60FUInq9WArM9XkE15dOBDlHXj1YPJFQ09smzwjv7LAxR2dagMiZnMvy'; 
@@ -36,14 +35,9 @@ function App() {
         <div className='fixed-width'>
           <Header/>
           <Routes>
-              <Route path="/" element={<Navigate to="/welcome"/>}/>
-              <Route path="/welcome" element={
-              <>
-                <DayPicture/>
-                <hr className='dividing-line'/>
-                <Photographs/>
-              </>}/>
-              <Route path="/products/:itemId" element={<ItemDetail/>}/>
+              <Route path="/" element={<Navigate to={`${homePath}`}/>}/>
+              <Route path={`${homePath}`} element={<Home/>}/>
+              <Route path={`${productsPath}/:itemId`} element={<ItemDetail/>}/>
               <Route path="*" element={<NotFound/>}/>
             </Routes>
         </div>
