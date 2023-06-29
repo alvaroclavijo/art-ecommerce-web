@@ -1,9 +1,7 @@
-import React, { useContext } from 'react';
 import { useDispatch } from 'react-redux';
 import { useSelector } from 'react-redux';
 
 import { uiActions } from '../../store/ui-slice';
-import { globalContext } from '../../App';
 
 import styles from './styles.module.scss';
 import logo from '../../assets/icons/logo.svg';

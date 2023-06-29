@@ -1,9 +1,9 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import AddToCartBtn from "../AddToCartBtn";
 import styles from "./styles.module.scss";
 import { FETCH_FEATURED_PRODUCT } from "../../GraphQLQueries";
-import { client, globalContext } from "../../App";
+import { client } from "../../App";
 import { uiActions } from "../../store/ui-slice";
 import { cartActions } from "../../store/cart-slice";
 import Loading from "../Loading";
@@ -13,7 +13,7 @@ const DayPicture = () => {
   const dispatch = useDispatch();
 
   const [featuredProduct, setFeaturedProduct] = useState();
-  const { isLoading, setIsLoading } = useContext(globalContext)
+  const [ isLoading, setIsLoading ] = useState(false)
 
   useEffect(() => {
     fetchDayPicture();

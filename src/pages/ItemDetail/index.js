@@ -1,8 +1,8 @@
-import React, { useEffect, useState, useContext } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { FETCH_PRODUCT_BY_ID } from '../../GraphQLQueries';
-import { client, globalContext } from '../../App';
+import { client } from '../../App';
 
 import styles from './styles.module.scss';
 import AddToCartBtn from '../../components/AddToCartBtn';
@@ -14,7 +14,7 @@ import { homePath } from '../../utils/routePaths';
 const ItemDetail = () => {
   const { itemId } = useParams();
   const [product, setProduct] = useState(null);
-  const { isLoading, setIsLoading } = useContext(globalContext);
+  const [ isLoading, setIsLoading ] = useState(false);
 
   const dispatch = useDispatch();
 

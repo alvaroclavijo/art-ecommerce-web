@@ -1,4 +1,3 @@
-import React, { useContext } from "react";
 import { globalContext } from "../../../App";
 import { PhotographItem } from "./PhotographItem";
 import { Pagination } from "@mui/material";
@@ -6,8 +5,7 @@ import { Pagination } from "@mui/material";
 import styles from "./styles.module.scss";
 import Loading from "../../Loading";
 
-const PhotographsList = ({ products, totalProducts, page, changePage }) => {
-  const { isLoading } = useContext(globalContext);
+const PhotographsList = ({ products, totalProducts, page, changePage, isLoading }) => {
 
   function onChangePageHandler(event, value) {
     changePage(value);
@@ -20,7 +18,7 @@ const PhotographsList = ({ products, totalProducts, page, changePage }) => {
           <Loading />
         ) : (
           products?.map((product) => (
-            <PhotographItem key={product.product_id} product={product} />
+            <PhotographItem key={product.product_id} product={product}/>
           ))
         )}
       </div>

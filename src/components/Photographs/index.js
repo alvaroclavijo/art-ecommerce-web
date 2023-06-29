@@ -1,6 +1,5 @@
-import React, { useEffect, useState, useContext } from "react";
+import React, { useEffect, useState } from "react";
 
-import { globalContext } from "../../App";
 import sortingArrows from "../../assets/icons/sorting_arrows.svg";
 import { FETCH_ALL_PRODUCTS, FETCH_CATEGOTIES } from "../../GraphQLQueries";
 import { P0_20, P100_200, P20_100, PM200 } from "../../utils/princeRangeFilters";
@@ -11,7 +10,7 @@ import { client } from "../../App";
 
 export const Photographs = () => {
 
-  const { setIsLoading } = useContext(globalContext);
+  const [isLoading, setIsLoading] = useState(false);
 
   const [products, setProducts] = useState([]);
   const [categories, setCategories] = useState([]);
@@ -150,7 +149,7 @@ export const Photographs = () => {
         />
       </div>
       <div className={styles["photographs__list"]}>
-        <PhotographsList products={products} totalProducts={totalCount} page={page} changePage={(page) => updatePageNumber(page)} />
+        <PhotographsList products={products} totalProducts={totalCount} page={page} changePage={(page) => updatePageNumber(page)} isLoading={isLoading} />
       </div>
     </div>
   );
